@@ -3,6 +3,7 @@
 use App\Http\Controllers\ControllerPergunta;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ControllerUser;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +17,11 @@ use App\Http\Controllers\ControllerUser;
 */
 
 Route::get('/', function () {
-    return view('index');
+    if(Auth::check()){
+        return redirect()->route('jogo');
+    }else{
+        return view('login');
+    }
 })->name('index');
 
 Route::get('/login',[ControllerUser::class, 'login'])->name('login');
@@ -29,4 +34,6 @@ Route::middleware(['auth'])->group(function(){
     Route::get('layout',[ControllerPergunta::class,'layout'])->name('layout');
     Route::get('perguntas',[ControllerPergunta::class,'index'])->name('pergunta.index');
     Route::post('pergunta/save',[ControllerPergunta::class,'Salvar_Pergunta'])->name('Salvar_Pergunta');
+    Route::get('/jogo',[ControllerPergunta::class,'jogo'])->name('jogo');
+    Route::post('/jogo/responder',[ControllerPergunta::class,'responder'])->name('responder');
 });

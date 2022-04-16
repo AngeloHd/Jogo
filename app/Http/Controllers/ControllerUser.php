@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pontuacao;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -25,10 +26,16 @@ class ControllerUser extends Controller
             'password'=>hash::make($request->password),
         ]);
 
+        $last_user = User::get()->last();
+        $ponto = Pontuacao::create([
+            'pontuacao'=>0,
+            'user_id'=>$last_user->id
+        ]);
+
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('index');
+            return redirect()->route('jogo');
             // dd("bem vindo");
             // $save['success']=true;
             // return json_encode($save);
@@ -46,7 +53,7 @@ class ControllerUser extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('index');
+            return redirect()->route('jogo');
         }else{
             dd("login ou senha invalido");
         }

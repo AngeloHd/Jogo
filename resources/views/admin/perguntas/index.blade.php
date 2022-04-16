@@ -1,4 +1,4 @@
-@extends('admin.layout')
+@extends('layout')
 @section('corpo')
 @include('admin.externas.datatable')
 @include('admin.externas.form_validation')

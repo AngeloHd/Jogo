@@ -12,5 +12,5 @@ class Resposta extends Model
     use HasFactory,SoftDeletes;
 
     protected $table = "respostas";
-    protected $fillable = ['certa,errada1,errada2,errada3'];
+    protected $fillable = ['certa','errada1','errada2','errada3'];
 }

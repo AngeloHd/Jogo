@@ -11,5 +11,5 @@ class Pergunta extends Model
     use HasFactory,SoftDeletes;
 
     protected $table = "perguntas";
-    protected $fillable = ['pergunta','nivel_id','resposta_id',''];
+    protected $fillable = ['pergunta','nivel_id','resposta_id'];
 }

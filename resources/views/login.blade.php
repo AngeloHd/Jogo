@@ -11,6 +11,7 @@
                 <input type="password" name="password" placeholder="**********">
                 <button type="submit">Entrar</button>
             </form>
+            <a href="{{ route('criar.conta') }}">Criar Conta</a>
         </div>
     </body>
 </html>

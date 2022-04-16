@@ -4,14 +4,14 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" >Pergunta <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input id="name" class="form-control col-md-7 col-xs-12" name="pergunta" required="required" type="text">
+                <input  class="form-control col-md-7 col-xs-12" name="pergunta" required="required" type="text">
             </div>
         </div>
         <div class="item form-group">
-            <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Nivel
+            <label class="control-label col-md-3 col-sm-3 col-xs-12">Nivel
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control">
+                <select class="form-control" name="nivel_id">
                     @foreach ($nivels as $nivel )
                     <option value="{{ $nivel->id }}">{{ $nivel->nivel }}</option>
                     @endforeach
@@ -22,7 +22,7 @@
             <label class="control-label col-md-3 col-sm-3 col-xs-12" >Resposta Certa <span class="required">*</span>
             </label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <input type="text" id="certa" name="certa" required="required" class="form-control col-md-7 col-xs-12">
+                <input type="text" name="certa" required="required" class="form-control col-md-7 col-xs-12">
             </div>
         </div>
         <div class="item form-group">

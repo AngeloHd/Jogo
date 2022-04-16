@@ -16,6 +16,7 @@ class CreateNivelsTable extends Migration
         Schema::create('nivels', function (Blueprint $table) {
             $table->id();
             $table->string('nivel');
+            $table->integer('pontuacao');
             $table->timestamps();
             $table->softDeletes();
         });
