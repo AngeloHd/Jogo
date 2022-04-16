@@ -17,7 +17,7 @@ class CreatePerguntaUtilizadorsTable extends Migration
             // $table->id();
             $table->foreignId('pergunta_id');
             $table->foreignId('user_id');
-            $table->foreign('pergunta_id')->references('in')->on('perguntas')->onDelete('cascade');
+            $table->foreign('pergunta_id')->references('id')->on('perguntas')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
