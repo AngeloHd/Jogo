@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ControllerPergunta;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ControllerUser;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('index');
+})->name('index');
+
+Route::get('/login',[ControllerUser::class, 'login'])->name('login');
+Route::get('/criar/conta',[ControllerUser::class, 'criar_conta'])->name('criar.conta');
+Route::post('/add/user',[ControllerUser::class,'adduser'])->name('adduser');
+Route::post('user/logout',[ControllerUser::class,'logout'])->name('logout');
+Route::post('/user/entrar',[ControllerUser::class,'entrar'])->name('entrar');
+
+Route::middleware(['auth'])->group(function(){
+    Route::get('layout',[ControllerPergunta::class,'layout'])->name('layout');
+    Route::get('perguntas',[ControllerPergunta::class,'index'])->name('pergunta.index');
+    Route::post('pergunta/save',[ControllerPergunta::class,'Salvar_Pergunta'])->name('Salvar_Pergunta');
 });

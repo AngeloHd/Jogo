@@ -1,0 +1,156 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Pessoa;
+use App\Http\Controllers\infosystem;
+use App\Models\Log;
+use App\Models\Funcao;
+use App\Models\Funcionario;
+use App\Models\Contacto;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use App\Models\numeroVisita;
+use App\Models\Loja;
+
+class ControllerAdmin extends Controller
+{
+
+  public function logado(Request $request) {
+
+    $credentials = $request->only('email', 'password');
+    if (Auth::attempt($credentials)) {
+      $log = Log::where('user','=',Auth::user()->pessoa_id)->update(['estado'=>'offline']);
+
+      $request->session()->regenerate();
+      $getip = infosystem::get_ip();
+      $getbrowser = infosystem::get_browsers();     
+      $getdevice = infosystem::get_device();
+      $getos = infosystem::get_os();
+      $getuseragent = infosystem::get_user_agent();
+      $data = date("d/m/Y");
+      $hora=date("H:i:s");
+
+      $log = Log::create([
+        'user'=>Auth::user()->pessoa_id,
+        'ip'=>$getip,
+        'browser'=>$getbrowser,
+        'device'=>$getdevice,
+        'os'=>$getos,
+        'user_agent'=>$getuseragent,
+        'data_entra'=>$data,
+        'hora'=>$hora,
+        'logitude'=>$request->logitude,
+        'latitude'=>$request->latitude,
+      ]);
+
+
+      $save['success']=true;
+      return json_encode($save);
+      ;
+    }else{
+    //dd("erro ao fazer o login");
+      $save['success']=false;
+      $save['message'] = "Login ou senha invalido";
+      return json_encode($save);
+
+    }
+  }
+
+
+  public function logout(Request $request){
+    $log = Log::where('user','=',Auth::user()->pessoa_id)->update(['estado'=>'offline']);
+    Auth::logout();
+    $request->session()->invalidate();
+    $request->session()->regenerateToken();
+    return redirect()->route('login.wise');
+  }
+
+  public function index2()
+  {
+    return view('admin.index');
+  }
+
+
+  public function registar(Request $request){
+    return view('admin.usuario');
+  }
+
+  public function salvar(Request $request){
+    $funcao = Funcao::create($request->all());
+    $conatcto = Contacto::create($request->all());
+
+    $f = Funcao::all()->last();
+    $funcao_id = $f->id;
+
+    $contactos = Contacto::all()->last();
+    $idcontacto = $contactos->id;
+
+    $savePessoa = Pessoa::create([
+     'nome_pessoa'=>$request->nome_pessoa,
+     'tipo_doc'=>$request->tipo_doc,
+     'numero_iddentificacao'=>$request->numero_iddentificacao,
+     'data_nasc'=>$request->data_nasc,
+     'fotografia'=>"sem-foto",
+     'genero'=>$request->genero,
+     'contacto_id'=>$idcontacto,
+     'tipo_pessoa'=>'funcionario_wise',
+   ]);
+
+    $pessoas = Pessoa::all()->last();
+    $idpessoa = $pessoas->id;
+
+    $saveFuncionario = Funcionario::create([
+     'id'=>$idpessoa,
+     'codigo'=>"12345",
+     'funcao_id'=>$funcao_id,
+   ]);
+
+            //user
+    $user = User::create([
+     'name' => $request->nome_pessoa,
+     'email' => $request->email,
+     'password' => Hash::make($request->password),
+     'pessoa_id' => $idpessoa,
+   ]);
+    return redirect()->route('login.wise');
+  }
+
+  public function pagClienteAdmin()
+  {
+    return view('admin.cliente.cliente_index');
+  }
+
+  public function dashboard(){
+
+    $totalUser = User::all()->count();
+    $totalLojas = Loja::all()->count();
+    $useronline = Log::where('estado','=','online')->count();
+    $utilizadores = DB::select("select count(p.id) as numero,p.tipo_pessoa as pessoas from users u, pessoas p where u.pessoa_id=p.id GROUP by p.tipo_pessoa");
+    if($utilizadores != null){
+     $users = json_encode($utilizadores);
+   }
+
+
+   $user_online = Log::join('pessoas','pessoas.id','log.user')
+   ->where('estado','=','online')
+   ->select('pessoas.nome_pessoa as nome','log.created_at as data')
+   ->get();
+
+
+   $mobile = Log::where('device','=','Mobile')->count();
+   $computer = Log::where('device','=','Computer')->count();
+   $visita = numeroVisita::all()->count();
+
+    //$mobile = DB::select('select count(device) as fone from log where device="Mobile"')->get();
+
+   // $os = DB::select('select distinct os from log');
+    //$osCount = DB::select('select count(device) as n,device from log group by device desc');
+        //dd("fatt 23");
+   return view('admin.perfils.dashboard',['totalUser'=>$totalUser,'totalLojas'=>$totalLojas,'useronline'=>$useronline,'mobile'=>$mobile,'computer'=>$computer,'visita'=>$visita,'user_online'=>$user_online,'users'=>$users]);
+ }
+
+}
