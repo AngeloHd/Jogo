@@ -42,7 +42,7 @@ class ControllerPergunta extends Controller
 
         $pontos = Pontuacao::where('user_id','=',Auth::user()->id)->first();
 
-        while(true){
+        // while(true){
             $nivel = Pontuacao::where('user_id','=',Auth::user()->id)->first();
 
             $perguntas = Pergunta::join('respostas','resposta_id','respostas.id')
@@ -54,14 +54,7 @@ class ControllerPergunta extends Controller
             ->where('user_id','=',Auth::user()->id)
             ->first();
 
-
-            if($verifica_pergunta === null){
-                return view('jogo.pergunta',['perguntas'=>$perguntas,'pontos'=>$pontos]);
-                break;
-                die();
-            }
-            // return view('jogo.pergunta',['perguntas'=>$perguntas,'pontos'=>$pontos]);
-        }
+            return view('jogo.pergunta',['perguntas'=>$perguntas,'pontos'=>$pontos]);
 
 
 
@@ -75,18 +68,23 @@ class ControllerPergunta extends Controller
         ->where('pergunta','=',$request->pergunta)
         ->first();
 
+        $pontos = Pontuacao::where('user_id','=',Auth::user()->id)->first();
+
         if($request->resposta == $pergunta->certa){
-            $pontos = Pontuacao::where('user_id','=',Auth::user()->id)->first();
             $soma_ponto = ($pontos->pontuacao + $pergunta->pontuacao);
-           $update_ponto = Pontuacao::where('id','=',$pontos->id)->update([
-               'pontuacao'=>$soma_ponto
-           ]);
-           $pergunta_user = Pergunta_Utilizador::create([
+            $update_ponto = Pontuacao::where('id','=',$pontos->id)->update([
+               'pontuacao'=>$soma_ponto,
+               'acertada'=>$pontos->acertada+1
+            ]);
+            $pergunta_user = Pergunta_Utilizador::create([
                'pergunta_id'=>$pergunta->id,
                'user_id'=>Auth::user()->id
-           ]);
-           return "sucesso";
+            ]);
+            return "sucesso";
         }else{
+            $update_ponto = Pontuacao::where('id','=',$pontos->id)->update([
+                'errada'=>$pontos->errada+1
+             ]);
             return "errado";
         }
     }

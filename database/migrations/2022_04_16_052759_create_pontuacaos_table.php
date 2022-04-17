@@ -18,6 +18,8 @@ class CreatePontuacaosTable extends Migration
             $table->integer('pontuacao');
             $table->foreignId('user_id');
             $table->integer('nivel');
+            $table->integer('acertada');
+            $table->integer('errada');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
             $table->softDeletes();
