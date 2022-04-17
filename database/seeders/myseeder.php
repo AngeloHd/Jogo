@@ -48,7 +48,8 @@ class myseeder extends Seeder
 
         $pontuacao = Pontuacao::create([
             'pontuacao'=>0,
-            'user_id'=>'1'
+            'user_id'=>'1',
+            'nivel'=>'1'
         ]);
     }
 }

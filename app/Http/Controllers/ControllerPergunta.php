@@ -43,8 +43,11 @@ class ControllerPergunta extends Controller
         $pontos = Pontuacao::where('user_id','=',Auth::user()->id)->first();
 
         while(true){
+            $nivel = Pontuacao::where('user_id','=',Auth::user()->id)->first();
 
             $perguntas = Pergunta::join('respostas','resposta_id','respostas.id')
+            ->join('nivels','nivel_id','nivels.id')
+            ->where('nivel_id','=',$nivel->nivel)
             ->inRandomOrder()->first();
 
             $verifica_pergunta = Pergunta_Utilizador::where('pergunta_id','=',$perguntas->id)
@@ -66,6 +69,7 @@ class ControllerPergunta extends Controller
 
     function responder(Request $request){
         // dd($request->all());
+
         $pergunta = Pergunta::join('nivels','nivel_id','nivels.id')
         ->join('respostas','resposta_id','respostas.id')
         ->where('pergunta','=',$request->pergunta)

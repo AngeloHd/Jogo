@@ -11,5 +11,5 @@ class Nivel extends Model
 {
     use HasFactory,SoftDeletes;
     protected $table = "nivels";
-    protected $fillable = ['nivel','pontuacao'];
+    protected $fillable = ['nivel','pontuacao','nivel'];
 }

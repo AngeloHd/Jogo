@@ -73,7 +73,7 @@
                 timer: 1500
             })
         }
-        location.reload(false)
+        // location.reload(false)
 
 		})
 
