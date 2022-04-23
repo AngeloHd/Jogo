@@ -90,25 +90,28 @@
     // alert(pergunta+':'+valor)
     //Responder
     $.post("{{route('responder')}}",{'_token': '{{ csrf_token() }}',pergunta:pergunta,resposta:resposta},function(datas){
-        // console.log(datas)
+        console.log(datas)
         if(datas == 'sucesso'){
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Resposta Certa',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            alert("resposta certa")
+
+            // Swal.fire({
+            //     position: 'top-end',
+            //     icon: 'success',
+            //     title: 'Resposta Certa',
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // })
         }else{
-            Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                title: 'Resposta errada!',
-                showConfirmButton: false,
-                timer: 1500
-            })
+            alert("resposta errada")
+            // Swal.fire({
+            //     position: 'top-end',
+            //     icon: 'error',
+            //     title: 'Resposta errada!',
+            //     showConfirmButton: false,
+            //     timer: 1500
+            // })
         }
-        location.reload(false)
+        location.reload(true)
 
 		})
 
@@ -134,7 +137,7 @@
             display.textContent = minutes + ":" + seconds;
             if (--timer < 0) {
                 timer = duration;
-                location.reload(true);
+                // location.reload(false);
             }
         }, 1000);
     }
@@ -147,7 +150,7 @@
         //     location.reload(true)
         // }
     };
-    // location.reload(true)
+    // location.reload(false)
 
 </script>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>

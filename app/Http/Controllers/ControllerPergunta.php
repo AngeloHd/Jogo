@@ -40,24 +40,28 @@ class ControllerPergunta extends Controller
 
     function jogo(){
 
+       while(true){
         $pontos = Pontuacao::where('user_id','=',Auth::user()->id)->first();
-
-        // while(true){
-            $nivel = Pontuacao::where('user_id','=',Auth::user()->id)->first();
-
-            $perguntas = Pergunta::join('respostas','resposta_id','respostas.id')
+        if($pontos->pontuacao >= 400){
+            dd("pergunta do nivel 2");
+        }
+        $perguntas = Pergunta::join('respostas','resposta_id','respostas.id')
             ->join('nivels','nivel_id','nivels.id')
-            ->where('nivel_id','=',$nivel->nivel)
+            ->where('nivel_id','=',$pontos->nivel)
             ->inRandomOrder()->first();
 
             $verifica_pergunta = Pergunta_Utilizador::where('pergunta_id','=',$perguntas->id)
             ->where('user_id','=',Auth::user()->id)
             ->first();
+            // dd($verifica_pergunta);
 
-            return view('jogo.pergunta',['perguntas'=>$perguntas,'pontos'=>$pontos]);
-
-
-
+            if($verifica_pergunta === null){
+                // dd("aqui");
+                return view('jogo.pergunta',['perguntas'=>$perguntas,'pontos'=>$pontos]);
+                break;
+                die();
+            }
+       }
     }
 
     function responder(Request $request){
@@ -71,15 +75,16 @@ class ControllerPergunta extends Controller
         $pontos = Pontuacao::where('user_id','=',Auth::user()->id)->first();
 
         if($request->resposta == $pergunta->certa){
+            $pergunta_user = Pergunta_Utilizador::create([
+                'pergunta_id'=>$pergunta->id,
+                'user_id'=>Auth::user()->id,
+             ]);
             $soma_ponto = ($pontos->pontuacao + $pergunta->pontuacao);
             $update_ponto = Pontuacao::where('id','=',$pontos->id)->update([
                'pontuacao'=>$soma_ponto,
                'acertada'=>$pontos->acertada+1
             ]);
-            $pergunta_user = Pergunta_Utilizador::create([
-               'pergunta_id'=>$pergunta->id,
-               'user_id'=>Auth::user()->id
-            ]);
+
             return "sucesso";
         }else{
             $update_ponto = Pontuacao::where('id','=',$pontos->id)->update([
