@@ -47,7 +47,6 @@
                 <strong>
                     <h2 class="text-info">{{ number_format($pontos->pontuacao,2) }} USD</h2>
                 </strong>
-
             </div>
         </div>
     </div>

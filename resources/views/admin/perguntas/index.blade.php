@@ -28,35 +28,23 @@
             <table id="example" class="table table-striped responsive-utilities jambo_table">
                 <thead>
                     <tr class="headings">
-                        <th>
-                            <input type="checkbox" class="tableflat">
-                        </th>
                         <th>Pergunta </th>
                         <th>NIvel </th>
-                        <th>Order </th>
-                        <th>Bill to Name </th>
-                        <th>Status </th>
-                        <th>Amount </th>
                         <th class=" no-link last"><span class="nobr">Action</span>
                         </th>
                     </tr>
                 </thead>
 
                 <tbody>
+                    @foreach($perguntas as $pergunta)
                     <tr class="even pointer">
-                        <td class="a-center ">
-                            <input type="checkbox" class="tableflat">
-                        </td>
-                        <td class=" ">121000040</td>
-                        <td class=" ">May 23, 2014 11:47:56 PM </td>
-                        <td class=" ">121000210 <i class="success fa fa-long-arrow-up"></i>
-                        </td>
-                        <td class=" ">John Blank L</td>
-                        <td class=" ">Paid</td>
-                        <td class="a-right a-right ">$7.45</td>
-                        <td class=" last"><a href="#">View</a>
+                        <td class=" ">{{$pergunta->pergunta}}</td>
+                        <td class=" ">{{$pergunta->nivel}}</td>
+                        <td class=" last">
+                           <a href="{{route('Edit_pergunta',$pergunta->id)}}" class="btn btn-info">Editar Pergunta</a>
                         </td>
                     </tr>
+                    @endforeach
                 </tbody>
 
             </table>
@@ -73,9 +61,9 @@
                     <h4 class="modal-title" id="myModalLabel">Nova Pergunta</h4>
                 </div>
                 <div class="modal-body">
-                        <form class="form-horizontal form-label-left" action="{{ route('Salvar_Pergunta') }}" method="POST">
-                            @include('admin.perguntas.form')
-                        </form>
+                    <form class="form-horizontal form-label-left" action="{{ route('Salvar_Pergunta') }}" method="POST">
+                        @include('admin.perguntas.form')
+                    </form>
                 </div>
             </div>
         </div>

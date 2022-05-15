@@ -19,6 +19,7 @@ class ControllerUser extends Controller
     }
 
     function adduser(Request $request){
+        // dd($request->all());
 
         $user = User::create([
             'name'=>$request->name,
@@ -29,13 +30,17 @@ class ControllerUser extends Controller
         $last_user = User::get()->last();
         $ponto = Pontuacao::create([
             'pontuacao'=>0,
-            'user_id'=>$last_user->id
+            'user_id'=>$last_user->id,
+            'acertada'=>0,
+            'errada'=>0,
+            'nivel'=>1
         ]);
 
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('jogo');
+            return redirect()->route('inicio');
+            
             // dd("bem vindo");
             // $save['success']=true;
             // return json_encode($save);
@@ -53,7 +58,7 @@ class ControllerUser extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('jogo');
+            return redirect()->route('inicio');
         }else{
             dd("login ou senha invalido");
         }

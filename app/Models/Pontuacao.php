@@ -11,5 +11,5 @@ class Pontuacao extends Model
     use HasFactory,SoftDeletes;
 
     protected $table = "pontuacaos";
-    protected $fillable = ['pontuacao','user_id','acertada','errada'];
+    protected $fillable = ['pontuacao','user_id','acertada','errada','nivel'];
 }

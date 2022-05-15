@@ -16,9 +16,43 @@ class ControllerPergunta extends Controller
         return view('layout');
     }
 
+    function Edit_pergunta($id){
+        $nivels = Nivel::get();
+       $pergunta = Pergunta::join('respostas','respostas.id','resposta_id')
+        ->join('nivels','nivels.id','nivel_id')
+        ->where('perguntas.id','=',$id)
+        ->select('perguntas.*','nivels.nivel as nivel','respostas.id as idresposta','respostas.certa as certa','respostas.errada1 as errada1','respostas.errada2 as errada2','respostas.errada3 as errada3',)
+        ->first();
+        return view('admin.perguntas.edit',['pergunta'=>$pergunta,'nivels'=>$nivels]);
+    }
+
+    function salvar_edit(Request $request,$id){
+
+        $rs = Pergunta::where('id','=',$id)->first();
+        $pergunta = Pergunta::where('id','=',$id)->update([
+            'pergunta'=>$request->pergunta,
+            'nivel_id'=>$request->nivel_id
+        ]);
+
+        $resposta = Resposta::where('id','=',$rs->id)->update([
+            'certa'=>$request->certa,
+            'errada1'=>$request->errada1,
+            'errada2'=>$request->errada2,
+            'errada3'=>$request->errada3
+        ]);
+
+        return redirect()->route('pergunta.index');
+
+    }
+
     function index(){
         $nivels = Nivel::get();
-        return view ('admin.perguntas.index',['nivels'=>$nivels]);
+        $perguntas = Pergunta::join('respostas','respostas.id','resposta_id')
+        ->join('nivels','nivels.id','nivel_id')
+        ->select('perguntas.*','nivels.nivel as nivel')
+        ->get();
+        // dd($perguntas);
+        return view ('admin.perguntas.index',['nivels'=>$nivels,'perguntas'=>$perguntas]);
     }
 
     function Salvar_Pergunta(Request $request){
@@ -92,5 +126,33 @@ class ControllerPergunta extends Controller
              ]);
             return "errado";
         }
+    }
+
+    function inicio(){
+
+        while(true){
+        $pontos = Pontuacao::where('user_id','=',Auth::user()->id)->first();
+        if($pontos->pontuacao >= 400){
+            dd("pergunta do nivel 2");
+        }
+        $perguntas = Pergunta::join('respostas','resposta_id','respostas.id')
+            ->join('nivels','nivel_id','nivels.id')
+            ->where('nivel_id','=',$pontos->nivel)
+            ->inRandomOrder()->first();
+            // dd($perguntas);
+
+            $verifica_pergunta = Pergunta_Utilizador::where('pergunta_id','=',$perguntas->id)
+            ->where('user_id','=',Auth::user()->id)
+            ->first();
+            // dd($verifica_pergunta);
+
+            if($verifica_pergunta === null){
+               
+                return view('bill.index',['perguntas'=>$perguntas,'pontos'=>$pontos]);
+                break;
+                die();
+            }
+       }
+       
     }
 }
