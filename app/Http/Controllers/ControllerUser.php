@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Auth;
 class ControllerUser extends Controller
 {
     function login(){
+        if(Auth::check()){
+            return redirect()->route('inicio');
+        }
         return view('login');
     }
 
@@ -40,7 +43,7 @@ class ControllerUser extends Controller
 
         if (Auth::attempt($credentials)) {
             return redirect()->route('inicio');
-            
+
             // dd("bem vindo");
             // $save['success']=true;
             // return json_encode($save);
