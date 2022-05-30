@@ -68,24 +68,24 @@
     $.post("{{route('responder')}}",{'_token': '{{ csrf_token() }}',pergunta:pergunta,resposta:resposta},function(datas){
     	console.log(datas)
     	if(datas == 'sucesso'){
-    		// alert("resposta certa")
+    		alert("resposta certa")
 
-            Swal.fire({
-                position: 'top-end',
-                icon: 'success',
-                title: 'Resposta Certa',
-                showConfirmButton: false,
-                timer: 3000
-            })
+            // Swal.fire({
+            //     position: 'top-end',
+            //     icon: 'success',
+            //     title: 'Resposta Certa',
+            //     showConfirmButton: false,
+            //     timer: 3000
+            // })
         }else{
-        	// alert("resposta errada")
-            Swal.fire({
-                position: 'top-end',
-                icon: 'error',
-                title: 'Resposta errada!',
-                showConfirmButton: false,
-                timer: 2000
-            })
+        	alert("resposta errada")
+            // Swal.fire({
+            //     position: 'top-end',
+            //     icon: 'error',
+            //     title: 'Resposta errada!',
+            //     showConfirmButton: false,
+            //     timer: 2000
+            // })
         }
         location.reload(true)
 

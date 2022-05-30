@@ -20,8 +20,8 @@ Route::get('/', function () {
     if(Auth::check()){
         return redirect()->route('inicio');
     }else{
-        return view('login');
-        // return redirect()->route('inicio');
+         return view('login');
+    //    return view('bill.index2');
     }
 })->name('index');
 
@@ -34,13 +34,14 @@ Route::post('/user/entrar',[ControllerUser::class,'entrar'])->name('entrar');
 
 
 Route::middleware(['auth'])->group(function(){
-    Route::prefix('administrador/angelo/mwadiavita/hd/huns/imetro/djamila')->group(function(){
+    Route::prefix('administrador/jogo/da/banda')->group(function(){
         Route::get('/jogo',[ControllerPergunta::class,'jogo'])->name('jogo');
         Route::get('layout',[ControllerPergunta::class,'layout'])->name('layout');
         Route::get('perguntas',[ControllerPergunta::class,'index'])->name('pergunta.index');
         Route::post('pergunta/save',[ControllerPergunta::class,'Salvar_Pergunta'])->name('Salvar_Pergunta');
         Route::get('pergunta/editar/{id}',[ControllerPergunta::class,'Edit_pergunta'])->name('Edit_pergunta');
         Route::post('pergunta/salvar/edit/{id}',[ControllerPergunta::class,'salvar_edit'])->name('salvar_edit');
+        Route::get('/parabens',[ControllerPergunta::class,'parabens'])->name('parabens');
 
     });
     Route::post('user/logout',[ControllerUser::class,'logout'])->name('logout');
