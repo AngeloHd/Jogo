@@ -17,12 +17,13 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    if(Auth::check()){
-        return redirect()->route('inicio');
-    }else{
-         return view('login');
-    //    return view('bill.index2');
-    }
+    return view('bill.inicio');
+    // if(Auth::check()){
+    //     return redirect()->route('inicio');
+    // }else{
+    //      return view('login');
+    // //    return view('bill.index2');
+    // }
 })->name('index');
 
 Route::get('/login',[ControllerUser::class, 'login'])->name('login');

@@ -49,6 +49,7 @@
         }
 
     </style>
+    {{-- <link rel="stylesheet" href="{{ url('Home/home.css') }}"> --}}
     {{-- <link href="{{ url('admin/css/custom.css') }}" rel="stylesheet"> --}}
 </head>
 

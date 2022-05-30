@@ -1,0 +1,117 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+body{
+    background-color: rgb(30, 31, 31);
+    overflow: hidden;
+}
+.container{
+    height: 300px;
+   /* width: 100vh; */
+    text-align: center;
+    position: relative;
+    top: 30vh;
+    align-items: center;
+}
+h2{
+    margin: 30px;
+    color: gray;
+    font-size: 28px;
+}
+h1{
+    margin: 30px;
+    color: whitesmoke;
+    font-size: 60px;
+}
+input[type="button"]{
+    color: #FFF;
+    cursor: pointer;
+    display: block;
+    margin: 20px auto;
+    padding: 10px 90px;
+    background: rgb(70, 177,243);
+    border: none;
+    border-radius: 3px;
+    font-weight: bold;
+}
+input[type="button"]:hover{
+    box-shadow: 1px 1px 6px rgb(70, 177,243);
+}
+a{
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    padding: 20px;
+}
+span{
+    color: rgb(70, 177,243);
+}
+.lemon{
+    height: 130px;
+    width: 240px;
+    position: absolute;
+    background: rgb(248, 184, 66);
+    border-radius: 10px 10px 130px 130px;
+    top: 5vh;
+    right: 30vh;
+    animation: lemon 5s infinite;
+}
+@keyframes lemon{
+    0%{
+        transform: rotate(-30deg) translateY(-30px);
+    }
+    50%{
+        transform: rotate(-10deg);
+    }
+    100%{
+        transform: rotate(-30deg) translateY(-30px);
+    }
+}
+.triangle{
+    height: 0;
+    width: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 80px solid orangered;
+    position: absolute;
+    bottom: 10vh;
+    left: 15vw;
+    animation: triangle 20s infinite;
+}
+
+@keyframes triangle{
+    50%{
+        transform: rotate(80deg);
+    }
+}
+.capsule{
+    height: 200px;
+    width: 100px;
+    background: gray;
+    border-radius: 50px;
+    position: absolute;
+    top: 35vh;
+    animation: capsule 20s infinite;
+}
+@keyframes capsule{
+    50%{
+        transform: rotate(90deg);
+    }
+}
+.square{
+    height: 250px;
+    width: 250px;
+    background: rgb(4, 247, 154);
+    border-radius: 20px;
+    position: absolute;
+    bottom: 10vh;
+    right: -10vh;
+    animation: square 35s infinite;
+}
+@keyframes square{
+    50%{
+        transform: rotate(180deg);
+    }
+}
