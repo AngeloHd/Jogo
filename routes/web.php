@@ -27,7 +27,7 @@ Route::get('/', function () {
     }
 })->name('index');
 
-Route::get('/login', [ControllerUser::class, 'login'])->name('login');
+Route::get('/login', [ControllerUser::class, 'login'])->name('login2');
 Route::get('/criar/conta', [ControllerUser::class, 'criar_conta'])->name('criar.conta');
 Route::post('/add/user', [ControllerUser::class, 'adduser'])->name('adduser');
 
@@ -37,8 +37,6 @@ Route::post('/user/entrar', [ControllerUser::class, 'entrar'])->name('entrar');
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('administrador/jogo/da/banda')->group(function () {
-        Route::get('/jogo', [ControllerPergunta::class, 'jogo'])->name('jogo');
-        Route::get('layout', [ControllerPergunta::class, 'layout'])->name('layout');
         Route::get('perguntas', [ControllerPergunta::class, 'index'])->name('pergunta.index');
         Route::post('pergunta/save', [ControllerPergunta::class, 'Salvar_Pergunta'])->name('Salvar_Pergunta');
         Route::get('pergunta/editar/{id}', [ControllerPergunta::class, 'Edit_pergunta'])->name('Edit_pergunta');

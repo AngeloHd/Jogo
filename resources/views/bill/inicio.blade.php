@@ -11,8 +11,8 @@
     <div class="container">
         <h2>Desafia-te com perguntas sobre tecnologia, entretenimento e cultura geral</h2>
         <h1>Perguntas da Banda</h1>
-        {{-- <input href="" type="button" value="Iniciar Jogo"> --}}
-        <a href="{{ route('inicio') }}"> Comece sua jornada e suba de nível! <strong> Iniciar Jogo </strong></a>
+        <!-- <input href="" type="button" value="Iniciar Jogo"> -->
+        <a href="{{ route('login2') }}"> Comece sua jornada e suba de nível! <strong> Iniciar Jogo </strong></a>
     </div>
     <div class="lemon"></div>
     <div class="triangle"></div>

@@ -6,7 +6,7 @@
     <div class="x_panel">
         <div class="x_title">
             <h2>Minhas Perguntas......</h2>
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Adicioanr Pergunta</button>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-lg">Adicionar Pergunta</button>
             <ul class="nav navbar-right panel_toolbox">
                 <li><a href="#"><i class="fa fa-chevron-up"></i></a>
                 </li>

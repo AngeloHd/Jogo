@@ -8,7 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Gentallela Alela! | </title>
+    <title>Perguntas da banda | </title>
 
     <!-- Bootstrap core CSS -->
 
@@ -45,7 +45,7 @@
                 <div class="left_col scroll-view">
 
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
+                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span> PD!</span></a>
                     </div>
                     <div class="clearfix"></div>
 
@@ -55,7 +55,7 @@
                             <img src="images/img.jpg" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
-                            <span>Welcome,</span>
+                            <span>Bemvindo,</span>
                             <h2>{{ Auth::user()->name }}</h2>
                         </div>
                     </div>
@@ -74,7 +74,7 @@
                                     <ul class="nav child_menu" style="display: none">
                                         <li><a href="{{ route('pergunta.index') }}">Perguntas</a>
                                         </li>
-                                        <li><a href="{{ route('jogo') }}">Jogar</a>
+                                        <li><a href="{{ route('inicio') }}" target="_blank">Jogar</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -139,7 +139,7 @@
                 <footer>
                     <div class="">
                         <p class="pull-right">Gentelella Alela! a Bootstrap 3 template by <a>Kimlabs</a>. |
-                            <span class="lead"> <i class="fa fa-paw"></i> Gentelella Alela!</span>
+                            <span class="lead"> <i class="fa fa-paw"></i> Perguntas da Banda!</span>
                         </p>
                     </div>
                     <div class="clearfix"></div>

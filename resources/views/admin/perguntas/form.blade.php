@@ -4,7 +4,7 @@
     <label class="control-label col-md-3 col-sm-3 col-xs-12" >Pergunta <span class="required">*</span>
     </label>
     <div class="col-md-6 col-sm-6 col-xs-12">
-         <input type="text" name="pergunta" required="required" class="form-control col-md-7 col-xs-12" value="{{$pergunta->pergunta ?? old ('pergunta')}}">
+         <input type="text" name="pergunta" required="required" class="form-control col-md-7 col-xs-12" value="{{$pergunta->pergunta ?? old ('pergunta')}}" minlength="10">
     </div>
 </div>
 <div class="item form-group">

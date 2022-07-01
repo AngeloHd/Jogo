@@ -1,36 +1,4 @@
-<!-- <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url('bill/styles/responsive/appResponsive.css')}}">
-    <link rel="stylesheet" href="{{url('bill/styles/app.css')}}">
-    <link rel="stylesheet" href="{{url('bill/styles/game.css')}}">
-
-    <title>Perguntas da Banda</title>
-</head>
-<body>
-    <div class="container">
-        <div id="home" class="flex-center flex-column">
-            <form method="post" action="{{ route('entrar') }}">
-                @csrf
-                <div class="choice-container">
-                    <input type="email" name="email" placeholder="email" class="choice-text">
-                </div>
-
-                <div class="choice-container">
-                    <input type="password" name="password" placeholder="**********" class="choice-text">
-                </div>
-                <button type="submit" class="">Entrar</button>
-            </form>
-            <a href="{{ route('criar.conta') }}">Criar Conta</a>
-
-        </div>
-    </body>
-    </html> -->
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -57,7 +25,7 @@
 </head>
 
 <body style="background:#F7F7F7;">
-    
+
     <div class="">
         <a class="hiddenanchor" id="toregister"></a>
         <a class="hiddenanchor" id="tologin"></a>
@@ -69,7 +37,7 @@
                          @csrf
                         <h1>Bem vindo</h1>
                         <div>
-                            <input type="text" class="form-control" placeholder="Username" required="" name="email" />
+                            <input type="email" class="form-control" placeholder="Username" required="" name="email" />
                         </div>
                         <div>
                             <input type="password" class="form-control" placeholder="Password" required="" name="password" />
@@ -86,7 +54,7 @@
                             </p>
                             <div class="clearfix"></div>
                             <br />
-                            
+
                         </div>
                     </form>
                     <!-- form -->
